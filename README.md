@@ -1,8 +1,9 @@
-#**Module 2 Challenge - VBA**
-##Starter Code :star:
+# **Module 2 Challenge - VBA**
+
+## Starter Code :star:
 ![GitHub stockmarket](https://github.com/fgsalomao/VBA-challenge/blob/main/stockmarket.jpg)
 
-##Instructions
+## Instructions :information_source:
 
 Create a script that loops through all the stocks for one year and outputs the following information:
 
@@ -22,11 +23,11 @@ Create a script that loops through all the stocks for one year and outputs the f
 
 - Make the appropriate adjustments to your VBA script to enable it to run on every worksheet (that is, every year) at once.
 
-**NOTE**
+**NOTE** :warning:
 Make sure to use conditional formatting that will highlight positive change in green and negative change in red.
 
-###Other Considerations
+### Other Considerations :information_source:
 
--Use the sheet 'alphabetical_testing.xlsx' while developing your code. This dataset is smaller and will allow you to test faster. Your code should run on this file in under 3 to 5 minutes.
+- Use the sheet 'alphabetical_testing.xlsx' while developing your code. This dataset is smaller and will allow you to test faster. Your code should run on this file in under 3 to 5 minutes.
 
--Make sure that the script acts the same on every sheet. The joy of VBA is that it takes the tediousness out of repetitive tasks with the click of a button.
+- Make sure that the script acts the same on every sheet. The joy of VBA is that it takes the tediousness out of repetitive tasks with the click of a button.
