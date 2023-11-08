@@ -19,9 +19,9 @@ ws.Activate
 
 'Assign variables
 
-    start = 2
+    start = 2 'Serve as pointer (location)
     stk_total = 0
-    sum_tbl_row = 2
+    sum_tbl_row = 2 'Serve as pointer (location)
     lastrow = Cells(Rows.Count, "A").End(xlUp).Row
 
 ' Create Summary Table
@@ -34,14 +34,13 @@ ws.Activate
 'Loop through all table rows
     For i = 2 To lastrow
     
-        'Assign value to ticker
+        'Assign pointer to ticker
         ticker = Cells(start, "A").Value
     
         'Conditional - If next row ticker symbol <> previous
         If Cells(i + 1, "A").Value <> Cells(i, "A").Value Then
                        
-            'Assing value to variables (Yearly Change, % Change,
-            'Total Stock Volume)
+            'Assing value to variables
             
             ychange = Cells(i, 6).Value - Cells(start, 3)
             Perc_chg = ychange / Cells(start, 3)
@@ -74,7 +73,7 @@ ws.Activate
             start = i + 1
         
             
-        Else 'If next ticker <> previous, then continue to add to volume to stk_total
+        Else 'If next ticker = previous, then continue to add value from volume to stk_total
 
             stk_total = stk_total + Cells(i, "G").Value
 
@@ -101,16 +100,23 @@ ws.Activate
     ' Loop through the column values
     For i = 2 To lastrow
 
+        'If value ychange is greater than the current value assigned to max, then update value on max
         If Cells(i, "K").Value > max Then
+
             max = Cells(i, "K").Value
             Cells(2, "O").Value = Cells(i, "I").Value
-            
+
+        'If value ychange is lower than the current value assigned to min
+        'then update value on min.
         ElseIf Cells(i, "K").Value < min Then
+
             min = Cells(i, "K").Value
             Cells(3, "O").Value = Cells(i, "I").Value
 
         End If
         
+        'If value Total Stock Volume is greater than the current value assigned to max_total
+        'then update value on max_total.
         If Cells(i, "L").Value > max_total Then
         
             max_total = Cells(i, "L").Value
@@ -134,7 +140,6 @@ Columns("N:P").AutoFit
 
 'Next worksheet
 Next ws
-    
 
 End Sub
 
