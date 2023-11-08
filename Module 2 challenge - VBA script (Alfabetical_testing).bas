@@ -25,27 +25,27 @@ ws.Activate
     lastrow = Cells(Rows.Count, "A").End(xlUp).Row
 
 ' Create Summary Table
-    Cells(1, 9).Value = "Ticker"
-    Cells(1, 10).Value = "Yearly Change"
-    Cells(1, 11).Value = "Percent Change"
-    Cells(1, 12).Value = "Total Stock Volume"
+    Cells(1, "I").Value = "Ticker"
+    Cells(1, "J").Value = "Yearly Change"
+    Cells(1, "K").Value = "Percent Change"
+    Cells(1, "L").Value = "Total Stock Volume"
 
 
 'Loop through all table rows
     For i = 2 To lastrow
     
         'Assign value to ticker
-        ticker = Cells(start, 1).Value
+        ticker = Cells(start, "A").Value
     
         'Conditional - If next row ticker symbol <> previous
-        If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+        If Cells(i + 1, "A").Value <> Cells(i, "A").Value Then
                        
             'Assing value to variables (Yearly Change, % Change,
             'Total Stock Volume)
             
             ychange = Cells(i, 6).Value - Cells(start, 3)
             Perc_chg = ychange / Cells(start, 3)
-            stk_total = stk_total + Cells(i, 7).Value
+            stk_total = stk_total + Cells(i, "G").Value
             
             
             'Add variables value to summary table
@@ -55,13 +55,13 @@ ws.Activate
             Range("L" & sum_tbl_row).Value = Format(stk_total, "$0,00")
             
             
-            If Cells(sum_tbl_row, 10).Value < 0 Then
+            If Cells(sum_tbl_row, "J").Value < 0 Then
             
-            Cells(sum_tbl_row, 10).Interior.ColorIndex = 3
+                Cells(sum_tbl_row, "J").Interior.ColorIndex = 3
             
             Else
             
-            Cells(sum_tbl_row, 10).Interior.ColorIndex = 4
+                Cells(sum_tbl_row, "J").Interior.ColorIndex = 4
             
             End If
 
@@ -76,7 +76,7 @@ ws.Activate
             
         Else 'If next ticker <> previous, then continue to add to volume to stk_total
 
-            stk_total = stk_total + Cells(i, 7).Value
+            stk_total = stk_total + Cells(i, "G").Value
 
         End If
 
@@ -93,41 +93,42 @@ ws.Activate
 
 'Assign value to variables
     lastrow = Cells(Rows.Count, "J").End(xlUp).Row 'Resets lastrow for last range
-    max = Cells(2, 11).Value
-    min = Cells(2, 11).Value
-    max_total = Cells(2, 12).Value
+    max = 0
+    min = 0
+    max_total = 0
+    
 
     ' Loop through the column values
     For i = 2 To lastrow
 
-        If Cells(i, 11).Value > max Then
-            max = Cells(i, 11).Value
-            Cells(2, 15).Value = Cells(i, 9).Value
+        If Cells(i, "K").Value > max Then
+            max = Cells(i, "K").Value
+            Cells(2, "O").Value = Cells(i, "I").Value
             
-        ElseIf Cells(i, 11).Value < min Then
-            min = Cells(i, 11).Value
-            Cells(3, 15).Value = Cells(i, 9).Value
+        ElseIf Cells(i, "K").Value < min Then
+            min = Cells(i, "K").Value
+            Cells(3, "O").Value = Cells(i, "I").Value
 
         End If
         
-        If Cells(i, 12).Value > max_total Then
+        If Cells(i, "L").Value > max_total Then
         
-            max_total = Cells(i, 12).Value
-            Cells(4, 15).Value = Cells(i, 9).Value
+            max_total = Cells(i, "L").Value
+            Cells(4, "O").Value = Cells(i, "I").Value
             
         End If
         
     Next i
 
 ' Create Summary Table
-    Cells(1, 15).Value = "Ticker"
-    Cells(1, 16).Value = "Value"
-    Cells(2, 14).Value = "Gratest % Increase"
-    Cells(3, 14).Value = "Gratest % Decrease"
-    Cells(4, 14).Value = "Gratest Total Volume"
-    Cells(2, 16).Value = Format(max, "0.00%")
-    Cells(3, 16).Value = Format(min, "0.00%")
-    Cells(4, 16).Value = Format(max_total, "$0.00")
+    Cells(1, "O").Value = "Ticker"
+    Cells(1, "P").Value = "Value"
+    Cells(2, "N").Value = "Gratest % Increase"
+    Cells(3, "N").Value = "Gratest % Decrease"
+    Cells(4, "N").Value = "Gratest Total Volume"
+    Cells(2, "P").Value = Format(max, "0.00%")
+    Cells(3, "P").Value = Format(min, "0.00%")
+    Cells(4, "P").Value = Format(max_total, "$0.00")
 
 Columns("N:P").AutoFit
 
